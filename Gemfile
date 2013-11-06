@@ -12,10 +12,13 @@ gem 'rails', '~> 4.0.0'
 # Use pg for db
 gem 'pg'
 
-gem 'thin'
+gem 'unicorn', '4.6.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
+# Add Boostrap
+gem 'bootstrap-sass', '~> 2.0.4.2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -42,11 +45,17 @@ gem 'less-rails'
 
 group :development do
   gem 'debugger'
+  # fix rails console error on ubuntu
+  gem 'rb-readline', '~> 0.4.2'
 end
 
 gem 'balanced'
 
 gem 'quiet_assets', group: :development
+
+#group :production do
+#  gem 'rails_12factor'
+#end
 
 # Subledger Gem
 require 'openssl'
@@ -55,4 +64,4 @@ I_KNOW_THAT_OPENSSL_VERIFY_PEER_EQUALS_VERIFY_NONE_IS_WRONG = nil
 
 source 'https://boocx:i9JHYGcWC9zjtw06@gems.boocx.com'
 
-gem 'boocx'
+gem 'subledger'

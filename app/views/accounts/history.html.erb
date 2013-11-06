@@ -1,0 +1,38 @@
+<ul class="nav nav-tabs subledger-nav-tabs">
+  <li class="<%= 'active' if action_name == "my_rentals" %>"><%= link_to "My Rentals", my_rentals_path %></li>
+  <li class="<%= 'active' if action_name == "my_earnings" %>"><%= link_to "My Earnings", my_earnings_path %></li>
+  <li><%= link_to 'My Profile', edit_user_registration_path(current_user) %></li>
+</ul>
+
+<div class="tab-content subledger-tab-content">
+  <div class="tab-pane active" id="mybalance">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Balance</th>
+        </tr>
+        <tr>
+          <th colspan="2">&nbsp;</th>
+          <th>Total</th>
+          <th>
+            <%= format_amount @account, @balance %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lines.each do |line| %>
+          <tr>
+            <td><%= l line.effective_at, format: :short %></td>
+            <td><%= link_to line.description, line.reference, target: "_blank" %></td>
+            <td><%= format_amount @account, line.value %></td>
+            <td><%= format_amount @account, line.balance %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

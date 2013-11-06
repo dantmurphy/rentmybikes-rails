@@ -2,15 +2,15 @@ class ListingsController < ApplicationController
   before_filter :require_sign_in, :only => [:edit, :update]
   before_filter :listing_owner_required, :only => [:edit, :update]
 
-    def index
+  def index
     @listings = Listing.all
-    end
+  end
 
-    def show
+  def show
     @listing = Listing.find(params[:id])
-    end
+  end
 
-    def create
+  def create
     # generate marketplace object
     marketplace = Balanced::Marketplace.my_marketplace
     user, owner = nil, nil
@@ -27,8 +27,8 @@ class ListingsController < ApplicationController
     end
 
     # add bank account uri passed back from balanced.js
-
     owner.add_bank_account(bank_account_uri)
+
     if user_signed_in?
       @listing = current_user.listings.new
     else
@@ -52,11 +52,9 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    @listing = current_user.listings.find(params[:id])
   end
 
   def update
-    @listing = current_user.listings.find(params[:id])
     if @listing.update_attributes(params[:listing])
       @listing.price = @listing.price*100
       @listing.save!
@@ -74,7 +72,8 @@ private
   end
   
   def listing_owner_required
-    raise "Access Denied" unless (@listing.present? && user_signed_in? && @listing.users.include?(current_user))
+    @listing = current_user.listings.find(params[:id])
+    raise "Access Denied" unless (@listing.present? && @listing.user == current_user)
   end
 
 end

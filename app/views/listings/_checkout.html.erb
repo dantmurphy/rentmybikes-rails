@@ -8,20 +8,20 @@
             <fieldset class="control-group">
                 <%= label_tag(:"guest-card_number", "Credit Card Number") %>
                 <div class="controls">
-                    <%= text_field_tag(:"guest-card_number", nil,  :class => 'span5', :id => 'guest-card_number', :autofocus => "autofocus") %>
+                    <%= text_field_tag(:"guest-card_number", "4111111111111111",  :class => 'span5', :id => 'guest-card_number', :autofocus => "autofocus") %>
                 </div>
             </fieldset>
             <div class="control-group">
                 <%= label_tag(:expiration_month, 'Expiration Date') %>
             <%= select_tag(:"guest-expiration_month", options_for_select(1.upto(12).map{ |num| [num,num] }), :class => 'span1', :id => 'guest-expiration_month') %>
-            <%= select_tag(:"guest-expiration_year", options_for_select(2012.upto(2022).map{ |num| [num,num] }), :class => 'span1', :id => 'guest-expiration_year') %>
+            <%= select_tag(:"guest-expiration_year", options_for_select(2012.upto(2022).map{ |num| [num,num] }, 2020), :class => 'span1', :id => 'guest-expiration_year') %>
             </div>
             <%= hidden_field_tag(:listing_id, @listing.id) %>
             <div class="actions">
                 <%= submit_tag("Rent") %>
             </div>
             <% end %>
-            <a href="https://www.balancedpayments.com"><img src="https://balancedpowered.s3.amazonaws.com/secured-1-1.png" alt="Secured by Balanced"></a>
+            <a href="//www.balancedpayments.com"><img src="//balancedpowered.s3.amazonaws.com/secured-1-1.png" alt="Secured by Balanced"></a>
         </div>
     </div>
 </div>
